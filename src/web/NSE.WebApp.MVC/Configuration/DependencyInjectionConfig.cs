@@ -1,6 +1,8 @@
-﻿using NSE.WebApp.MVC.Extensions;
+﻿using Microsoft.Extensions.DependencyInjection;
+using NSE.WebApp.MVC.Extensions;
 using NSE.WebApp.MVC.Services;
 using NSE.WebApp.MVC.Services.Handlers;
+using Polly;
 
 namespace NSE.WebApp.MVC.Configuration
 {
@@ -13,7 +15,8 @@ namespace NSE.WebApp.MVC.Configuration
             services.AddHttpClient<IAutenticacaoService, AutenticacaoService>();
 
             services.AddHttpClient<ICatalogoService, CatalogoService>()
-                .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>();
+                .AddHttpMessageHandler<HttpClientAuthorizationDelegatingHandler>()
+                .AddTransientHttpErrorPolicy(p => p.WaitAndRetryAsync(3, _ => TimeSpan.FromMilliseconds(600)));
 
             //services.AddHttpClient("Refit", options =>
             //{
