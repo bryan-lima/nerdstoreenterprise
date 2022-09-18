@@ -20,7 +20,9 @@ namespace NSE.WebApp.MVC.Configuration
             //}
             //else
             //{
-
+            //    app.UseExceptionHandler("/erro/500");
+            //    app.UseStatusCodePagesWithRedirects("/erro/{0}");
+            //    app.UseHsts();
             //}
 
             app.UseExceptionHandler("/erro/500");
