@@ -16,6 +16,13 @@
 
   <ItemGroup>
     <Folder Include="Controllers\" />
+    <Folder Include="Application\" />
+    <Folder Include="Configuration\" />
+    <Folder Include="Data\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\building blocks\NSE.Core\NSE.Core.csproj" />
   </ItemGroup>
 
 </Project>
