@@ -4,19 +4,19 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:29189",
-      "sslPort": 44343
+      "applicationUrl": "http://localhost:32477",
+      "sslPort": 44348
     }
   },
   "profiles": {
-    "NSE.Cliente.API": {
+    "NSE.Clientes.API": {
       "commandName": "Project",
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "https://localhost:7130;http://localhost:5130",
+      "applicationUrl": "https://localhost:7146;http://localhost:5146",
       "dotnetRunMessages": true
     },
     "IIS Express": {
