@@ -52,7 +52,7 @@ namespace NSE.Identidade.API.Controllers
                 // Alguma coisa aqui => Evento de integração
                 var clienteResult = await RegistrarCliente(usuarioRegistro);
 
-                if (clienteResult.ValidationResult.IsValid)
+                if (!clienteResult.ValidationResult.IsValid)
                 {
                     await _userManager.DeleteAsync(user);
                     return CustomResponse(clienteResult.ValidationResult);
