@@ -1,4 +1,5 @@
 ﻿using NSE.Carrinho.API.Data;
+using NSE.WebAPI.Core.Usuario;
 
 namespace NSE.Carrinho.API.Configuration
 {
@@ -8,6 +9,7 @@ namespace NSE.Carrinho.API.Configuration
         {
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<CarrinhoContext>();
+            services.AddScoped<IAspNetUser, AspNetUser>();
         }
     }
 }
