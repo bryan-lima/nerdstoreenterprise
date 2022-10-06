@@ -21,6 +21,8 @@ namespace NSE.Carrinho.API.Data
                 e => e.GetProperties().Where(p => p.ClrType == typeof(string))))
                 property.SetColumnType("varchar(100)");
 
+            modelBuilder.Ignore<ValidationResult>();
+
             modelBuilder.Entity<CarrinhoCliente>()
                 .HasIndex(c => c.ClienteId)
                 .HasDatabaseName("IDX_Cliente");
