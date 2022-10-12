@@ -5,7 +5,7 @@ using NSE.Pedidos.Infra.Data.Repository;
 using NSE.Pedidos.Infra.Data;
 using NSE.WebAPI.Core.Usuario;
 
-namespace NSE.Pedido.API.Configuration
+namespace NSE.Pedidos.API.Configuration
 {
     public static class DependencyInjectionConfig
     {
