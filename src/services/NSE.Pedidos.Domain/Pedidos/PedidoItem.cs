@@ -1,4 +1,4 @@
-﻿using NetDevPack.Domain;
+﻿using NSE.Core.DomainObjects;
 using System;
 using System.Collections.Generic;
 using System.Linq;
