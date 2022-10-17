@@ -1,25 +1,34 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using NSE.Core.Validation;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
-using NSE.Core.Validation;
 
-namespace NSE.WebApp.MVC.Models
+namespace NSE.Bff.Compras.Models
 {
-    public class PedidoTransacaoViewModel
+    public class PedidoDTO
     {
         #region Pedido
 
+        public int Codigo { get; set; }
+        // Autorizado = 1,
+        // Pago = 2,
+        // Recusado = 3,
+        // Entregue = 4,
+        // Cancelado = 5
+        public int Status { get; set; }
+        public DateTime Data { get; set; }
         public decimal ValorTotal { get; set; }
+
         public decimal Desconto { get; set; }
         public string VoucherCodigo { get; set; }
         public bool VoucherUtilizado { get; set; }
 
-        public List<ItemCarrinhoViewModel> Itens { get; set; } = new List<ItemCarrinhoViewModel>();
+        public List<ItemCarrinhoDTO> PedidoItems { get; set; }
 
         #endregion Pedido
 
         #region Endereco
 
-        public EnderecoViewModel Endereco { get; set; }
+        public EnderecoDTO Endereco { get; set; }
 
         #endregion Endereco
 
@@ -43,6 +52,6 @@ namespace NSE.WebApp.MVC.Models
         [DisplayName("Código de Segurança")]
         public string CvvCartao { get; set; }
 
-        #endregion
+        #endregion Cartão
     }
 }

@@ -41,7 +41,8 @@ namespace NSE.Clientes.API.Application.Commands
 
         public async Task<ValidationResult> Handle(AdicionarEnderecoCommand message, CancellationToken cancellationToken)
         {
-            if (!message.EhValido()) return message.ValidationResult;
+            if (!message.EhValido())
+                return message.ValidationResult;
 
             var endereco = new Endereco(message.Logradouro, message.Numero, message.Complemento, message.Bairro, message.Cep, message.Cidade, message.Estado, message.ClienteId);
             _clienteRepository.AdicionarEndereco(endereco);
