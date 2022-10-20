@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using NSE.Catalogo.API.Configuration;
 using NSE.Catalogo.API.Data;
 using NSE.Catalogo.API.Data.Repository;
@@ -18,6 +19,7 @@ if (builder.Environment.IsDevelopment())
 }
 
 builder.Services.AddApiConfiguration(builder.Configuration);
+builder.Services.AddMessageBusConfiguration(builder.Configuration);
 builder.Services.AddJwtConfiguration(builder.Configuration);
 builder.Services.AddSwaggerConfiguration();
 builder.Services.RegisterServices();
