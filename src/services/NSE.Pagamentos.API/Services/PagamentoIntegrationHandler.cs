@@ -37,22 +37,17 @@ namespace NSE.Pagamentos.API.Services
 
         private async Task<ResponseMessage> AutorizarPagamento(PedidoIniciadoIntegrationEvent message)
         {
-            ResponseMessage response;
-
-            using (var scope = _serviceProvider.CreateScope())
+            using var scope = _serviceProvider.CreateScope();
+            var pagamentoService = scope.ServiceProvider.GetRequiredService<IPagamentoService>();
+            var pagamento = new Pagamento
             {
-                var pagamentoService = scope.ServiceProvider.GetRequiredService<IPagamentoService>();
+                PedidoId = message.PedidoId,
+                TipoPagamento = (TipoPagamento)message.TipoPagamento,
+                Valor = message.Valor,
+                CartaoCredito = new CartaoCredito(message.NomeCartao, message.NumeroCartao, message.MesAnoVencimento, message.CVV)
+            };
 
-                var pagamento = new Pagamento
-                {
-                    PedidoId = message.PedidoId,
-                    TipoPagamento = (TipoPagamento)message.TipoPagamento,
-                    Valor = message.Valor,
-                    CartaoCredito = new CartaoCredito(message.NomeCartao, message.NomeCartao, message.MesAnoVencimento, message.CVV)
-                };
-
-                response = await pagamentoService.AutorizarPagamento(pagamento);
-            }
+            var response = await pagamentoService.AutorizarPagamento(pagamento);
 
             return response;
         }

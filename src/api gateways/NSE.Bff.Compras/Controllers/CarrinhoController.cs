@@ -105,7 +105,7 @@ namespace NSE.Bff.Compras.Controllers
             return CustomResponse(resposta);
         }
 
-        private async Task ValidarItemCarrinho(ItemProdutoDTO produto, int quantidade)
+        private async Task ValidarItemCarrinho(ItemProdutoDTO produto, int quantidade, bool adicionarProduto = false)
         {
             if (produto == null)
                 AdicionarErroProcessamento("Produto inexistente!");
@@ -116,7 +116,7 @@ namespace NSE.Bff.Compras.Controllers
             var carrinho = await _carrinhoService.ObterCarrinho();
             var itemCarrinho = carrinho.Itens.FirstOrDefault(p => p.ProdutoId == produto.Id);
 
-            if (itemCarrinho != null && itemCarrinho.Quantidade + quantidade > produto.QuantidadeEstoque)
+            if (itemCarrinho != null && adicionarProduto && itemCarrinho.Quantidade + quantidade > produto.QuantidadeEstoque)
             {
                 AdicionarErroProcessamento($"O produto {produto.Nome} possui {produto.QuantidadeEstoque} unidades em estoque, você selecionou {quantidade}");
                 return;

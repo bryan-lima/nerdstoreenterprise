@@ -20,9 +20,14 @@ namespace NSE.Identidade.API.Configuration
 
             app.UseHttpsRedirection();
 
+            app.UseRouting();
+
             app.UseAuthConfiguration();
 
-            app.MapControllers();
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
 
             return app;
         }
