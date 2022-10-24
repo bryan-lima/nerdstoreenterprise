@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using NSE.Carrinho.API.Data;
+using NSE.Carrinho.API.Services.gRPC;
 using NSE.WebAPI.Core.Identidade;
 
 namespace NSE.Carrinho.API.Configuration
@@ -12,6 +13,8 @@ namespace NSE.Carrinho.API.Configuration
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
             services.AddControllers();
+
+            services.AddGrpc();
 
             services.AddCors(options =>
             {
@@ -42,6 +45,7 @@ namespace NSE.Carrinho.API.Configuration
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapGrpcService<CarrinhoGrpcService>().RequireCors("Total");
             });
         }
     }
