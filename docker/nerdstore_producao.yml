@@ -12,6 +12,18 @@ services:
       - "5672:5672"
       - "15672:15672"
 
+  sql-server:
+    image: bryanlimadev/nerdstoreenterprise-sql-server:latest
+    container_name: nerdstoreenterprise-sql-server
+    build:
+      context: ../sql
+      dockerfile: ./Dockerfile
+    ports:
+      - "1433:1433"
+    environment:
+      SA_PASSWORD: "MeuDB@123"
+      ACCEPT_EULA: "Y"
+
   web-mvc:
     image: bryanlimadev/nerdstoreenterprise-web-mvc-ecommerce:latest
     container_name: nerdstoreenterprise-web-mvc-ecommerce
@@ -22,7 +34,7 @@ services:
       - "5001:5001"
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
-      - ASPNETCORE_URLS=http://*:5001
+      - ASPNETCORE_URLS=http://+:5001
     depends_on:
       - api-catalogo
 
@@ -34,6 +46,6 @@ services:
       dockerfile: ./services/NSE.Catalogo.API/Dockerfile
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
-      - ASPNETCORE_URLS=http://*:5301
+      - ASPNETCORE_URLS=http://+:5301
     depends_on:
       - rabbitmq
