@@ -51,7 +51,7 @@ services:
       - "5101:5101"
     environment: 
       - ASPNETCORE_ENVIRONMENT=Production
-      - ASPNETCORE_URLS=https://+:5101
+      - ASPNETCORE_URLS=http://+:5101
     depends_on:
       - rabbitmq
       - sql-server
@@ -66,7 +66,7 @@ services:
       - "5201:5201"             
     environment: 
       - ASPNETCORE_ENVIRONMENT=Production
-      - ASPNETCORE_URLS=https://+:5201
+      - ASPNETCORE_URLS=http://+:5201
     depends_on:
       - rabbitmq
       - api-identidade
@@ -97,7 +97,7 @@ services:
       - "5401:5401"
     environment: 
       - ASPNETCORE_ENVIRONMENT=Production
-      - ASPNETCORE_URLS=https://+:5401
+      - ASPNETCORE_URLS=http://+:5401
     depends_on:
       - rabbitmq
       - api-identidade
@@ -113,7 +113,7 @@ services:
       - "5501:5501"
     environment: 
       - ASPNETCORE_ENVIRONMENT=Production
-      - ASPNETCORE_URLS=https://+:5501
+      - ASPNETCORE_URLS=http://+:5501
     depends_on:
       - rabbitmq
       - api-identidade
@@ -131,7 +131,7 @@ services:
       - "5601:5601"
     environment: 
       - ASPNETCORE_ENVIRONMENT=Production
-      - ASPNETCORE_URLS=https://+:5601
+      - ASPNETCORE_URLS=http://+:5601
     depends_on:
       - rabbitmq
       - api-identidade
@@ -148,7 +148,7 @@ services:
       - "5701:5701"
     environment: 
       - ASPNETCORE_ENVIRONMENT=Production
-      - ASPNETCORE_URLS=https://+:5701
+      - ASPNETCORE_URLS=http://+:5701
     depends_on:
       - rabbitmq
       - sql-server
