@@ -153,3 +153,15 @@ services:
       - rabbitmq
       - sql-server
       - api-identidade
+
+  nerdstoreenterprise-server:
+    image: bryanlimadev/nerdstoreenterprise-server:latest
+    container_name: nerdstoreenterprise-server
+    build:
+      context: ./
+      dockerfile: ./nginx/Dockerfile
+    ports:
+      - "80:80"
+      - "443:443"
+    depends_on:
+      - web-mvc

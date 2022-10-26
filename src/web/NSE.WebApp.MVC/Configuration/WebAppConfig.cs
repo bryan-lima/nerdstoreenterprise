@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Localization;
 using NSE.WebApp.MVC.Extensions;
 using System.Globalization;
@@ -11,11 +12,18 @@ namespace NSE.WebApp.MVC.Configuration
         {
             services.AddControllersWithViews();
 
+            services.Configure<ForwardedHeadersOptions>(options =>
+            {
+                options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+            });
+
             services.Configure<AppSettings>(configuration);
         }
 
         public static void UseMvcConfiguration(this WebApplication app, IWebHostEnvironment env)
         {
+            app.UseForwardedHeaders();
+
             //if (app.Environment.IsDevelopment())
             //{
             //    app.UseDeveloperExceptionPage();
