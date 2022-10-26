@@ -7,16 +7,19 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["src/services/NSE.Pedido.API/NSE.Pedido.API.csproj", "src/services/NSE.Pedido.API/"]
-RUN dotnet restore "src/services/NSE.Pedido.API/NSE.Pedido.API.csproj"
+COPY ["./services/NSE.Pedidos.API/NSE.Pedidos.API.csproj", "services/NSE.Pedidos.API/"]
+COPY ["./building blocks/NSE.Core/NSE.Core.csproj", "building blocks/NSE.WebAPI.Core/"]
+COPY ["./building blocks/NSE.WebAPI.Core/NSE.WebAPI.Core.csproj", "building blocks/NSE.WebAPI.Core/"]
+COPY ["./building blocks/NSE.MessageBus/NSE.MessageBus.csproj", "building blocks/NSE.MessageBus/"]
+RUN dotnet restore "services/NSE.Pedidos.API/NSE.Pedidos.API.csproj"
 COPY . .
-WORKDIR "/src/src/services/NSE.Pedido.API"
-RUN dotnet build "NSE.Pedido.API.csproj" -c Release -o /app/build
+WORKDIR "services/NSE.Pedidos.API"
+RUN dotnet build "NSE.Pedidos.API.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "NSE.Pedido.API.csproj" -c Release -o /app/publish
+RUN dotnet publish "NSE.Pedidos.API.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "NSE.Pedido.API.dll"]
+ENTRYPOINT ["dotnet", "NSE.Pedidos.API.dll"]
